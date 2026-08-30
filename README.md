@@ -50,7 +50,7 @@ Four independently deployable pieces, three of them stateful in their own
 right: Catalog.API and Ordering.API each own a SQLite file nobody else
 touches directly, and RabbitMQ owns the durable queues that make the async
 path survive a subscriber being briefly offline. `BuildingBlocks/EventBus`
-is the one piece of code shared across services — infrastructure
+is the one piece of code shared across services infrastructure
 (`IEventBus`, `IntegrationEvent`, the RabbitMQ implementation), never
 domain shape.
 
