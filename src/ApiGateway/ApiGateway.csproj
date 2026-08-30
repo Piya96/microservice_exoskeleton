@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Ocelot, not Azure API Management or a hand-rolled reverse proxy --
+         the same choice the source ebook's own eShopOnContainers sample
+         makes, and for the same reason: a .NET-native gateway that
+         deploys as just another container next to the services it fronts,
+         with zero PaaS dependency. See the README for why that's the
+         right call for a portfolio/reference repo and the wrong call to
+         copy verbatim into a real multi-team production system (Section
+         02's own recommendation there is Azure API Management). -->
+    <PackageReference Include="Ocelot" Version="23.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ocelot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

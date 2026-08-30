@@ -1,0 +1,57 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # management UI -- http://localhost:15672, guest/guest
+
+  catalog-api:
+    build:
+      context: ./src
+      dockerfile: Catalog.API/Dockerfile
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+    ports:
+      - "5081:8080"    # host 5081 matches Ordering.API's local (non-docker) default CATALOG_API_URL
+    volumes:
+      - catalog-data:/data
+
+  ordering-api:
+    build:
+      context: ./src
+      dockerfile: Ordering.API/Dockerfile
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - CATALOG_API_URL=http://catalog-api:8080
+    depends_on:
+      - rabbitmq
+      - catalog-api
+    ports:
+      - "5091:8080"
+    volumes:
+      - ordering-data:/data
+
+  notifications-worker:
+    build:
+      context: ./src
+      dockerfile: Notifications.Worker/Dockerfile
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+
+  apigateway:
+    build:
+      context: ./src
+      dockerfile: ApiGateway/Dockerfile
+    depends_on:
+      - catalog-api
+      - ordering-api
+    ports:
+      - "5000:8080"    # single front door: /catalog/* and /orders/*
+
+volumes:
+  catalog-data:
+  ordering-data:

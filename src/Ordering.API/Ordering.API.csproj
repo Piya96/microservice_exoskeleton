@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks\EventBus\BuildingBlocks.EventBus.csproj" />
+    <!-- Monorepo-demo convenience only -- see the XML doc comment on
+         ProductPriceChangedIntegrationEventHandler for why a real
+         multi-repo setup would give Ordering its own copy of this event
+         contract instead of referencing Catalog's project directly. -->
+    <ProjectReference Include="..\Catalog.API\Catalog.API.csproj" />
+  </ItemGroup>
+
+</Project>

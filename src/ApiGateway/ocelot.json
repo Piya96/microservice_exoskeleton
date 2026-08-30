@@ -1,0 +1,42 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/catalog/products",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "catalog-api", "Port": 8080 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/products/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/products/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "catalog-api", "Port": 8080 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/catalog/products/{id}/price",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "DownstreamPathTemplate": "/products/{id}/price",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "catalog-api", "Port": 8080 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/orders",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "DownstreamPathTemplate": "/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "ordering-api", "Port": 8080 } ]
+    },
+    {
+      "UpstreamPathTemplate": "/orders/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ { "Host": "ordering-api", "Port": 8080 } ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
