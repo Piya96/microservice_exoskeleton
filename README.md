@@ -199,7 +199,7 @@ curl -X POST http://localhost:5000/orders \
 ```
 
 Watch `notifications-worker`'s container logs for the order-confirmation
-line — that's `OrderPlacedIntegrationEvent` making it across the bus to a
+line that's `OrderPlacedIntegrationEvent` making it across the bus to a
 service that was never called directly.
 
 Faster edit-run loop while iterating on the .NET code (RabbitMQ in Docker,
